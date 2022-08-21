@@ -161,10 +161,6 @@ namespace TestProject
             {
                 try
                 {
-                    if (company.Name.Contains("КАРЛИС-ПРОМ"))
-                    {
-
-                    }
                     SourceCompanyDTO dbCompany = GetSimilarCompanyDTO(cashedDTOCompanies, company);
                     if (dbCompany == null)
                     {
