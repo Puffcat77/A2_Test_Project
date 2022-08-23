@@ -172,8 +172,6 @@ namespace TestProject
                         {
                             continue;
                         }
-                        //UI.LogWarn($"Имена компаний не совпадают, возможна неучтенная аббревиатура." +
-                        //    $"\nВ бд: {dbCompany.INN} {dbCompany.Name}.\nНовое имя: {company.INN} {company.Name}\n");
                         InsertCompany(companiesForUpdate, company, dbCompany);
                     }
                 }
@@ -216,14 +214,12 @@ namespace TestProject
         private void InsertCompany(Dictionary<string, List<SourceCompanyDTO>> dtoCompanies,
             SourceCompany company, SourceCompanyDTO dbCompany)
         {
-            // нету компаний с таким инн
             if (!dtoCompanies.ContainsKey(company.INN))
             {
                 dtoCompanies.Add(company.INN, new List<SourceCompanyDTO> { converter.ConvertCompanyToDTO(company, dbCompany?.Id) });
                 return;
             }
             SourceCompanyDTO newComp = GetSimilarCompanyDTO(dtoCompanies, company);
-            // нету компании с таким названием по такому инн
             if (newComp == null)
             {
                 if (string.IsNullOrWhiteSpace(dbCompany?.Name) || company.Name.Length >= dbCompany?.Name.Length)
