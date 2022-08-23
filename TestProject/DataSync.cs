@@ -252,17 +252,6 @@ namespace TestProject
             return null;
         }
 
-        private SourceCompany GetSimilarCompany(
-            Dictionary<string, List<SourceCompany>> companies,
-            SourceCompany company)
-        {
-            if (companies.ContainsKey(company.INN))
-            {
-                return companies[company.INN].FirstOrDefault(c => CleanName(c.Name) == CleanName(company.Name));
-            }
-            return null;
-        }
-
         private string CleanName(string name)
         {
             return converter.CleanName(name).ToUpper();
