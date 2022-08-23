@@ -42,7 +42,7 @@ namespace TestProject
                 {
                     UI.LogError("Произошла ошибка при получении данных из источника:");
                     UI.LogError(ex);
-                    UI.LogError("Попытка №1");
+                    UI.LogWarn("Попытка №1");
                     Thread.Sleep(Constants.REQUEST_FAIL_TIMEOUT);
                     if (i == 4)
                     {

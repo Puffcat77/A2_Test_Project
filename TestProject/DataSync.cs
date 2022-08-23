@@ -52,7 +52,8 @@ namespace TestProject
             DataParser parser = new DataParser();
             Dictionary<string, SourceDeal> totalDeals = new Dictionary<string, SourceDeal>();
             List<SourceDeal> currentDeals;
-            Dictionary<string, Dictionary<string, SourceCompany>> totalCompanies = new Dictionary<string, Dictionary<string, SourceCompany>>();
+            Dictionary<string, Dictionary<string, SourceCompany>> totalCompanies =
+                new Dictionary<string, Dictionary<string, SourceCompany>>();
             int pageNum = 0;
             Stopwatch pageStopwatch = new Stopwatch();
             do
@@ -82,7 +83,7 @@ namespace TestProject
             sw.Stop();
             UI.LogStatistics($"Обход завершен за: {sw.ElapsedMilliseconds} мс");
             UI.LogInfo("Синхронизация данных.");
-            UI.LogStatistics($"Всего сделок обнаружено {totalDeals.Count}.");
+            UI.LogInfo($"Всего сделок обнаружено {totalDeals.Count}.");
             sw.Restart();
             SyncData(totalDeals, totalCompanies.Values.SelectMany(v => v.Values).ToList());
             sw.Stop();
@@ -92,10 +93,6 @@ namespace TestProject
         private void TryAddSourceCompany(Dictionary<string, Dictionary<string, SourceCompany>> dealCompanies, SourceCompany company)
         {
             company.Name = converter.FixName(company.Name);
-            if (company.Name.Contains("POLAR BEAR LLC"))
-            {
-
-            }
             if (dealCompanies.ContainsKey(company.INN))
             {
                 if (!dealCompanies[company.INN].ContainsKey(company.Name))
